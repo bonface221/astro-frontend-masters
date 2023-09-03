@@ -6,6 +6,17 @@ function formatCurrency(amount: number) {
 	}).format(amount);
 }
 
+interface ShopItem {
+	id: number;
+	title: string;
+	description: string;
+	image: {
+		src: string;
+		alt: string;
+	};
+	price: number;
+}
+
 const result = await fetch(
 	'https://astro-frontend-masters-api.netlify.app/api/products'
 );
@@ -14,7 +25,7 @@ if (!result.ok) {
 	console.error(result);
 }
 
-const shopItems = await result.json();
+const shopItems: ShopItem[] = await result.json();
 ---
 
 <section class="shop-items">
